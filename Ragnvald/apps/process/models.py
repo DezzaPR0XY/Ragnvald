@@ -1,8 +1,16 @@
 from django.db import models
-from login_reg.models import User
+from apps.login_reg.models import User
 
 # Create your models here.
 # For a FKey does "this" need another relationship on create
+
+
+
+class Tag(models.Model):
+  name = models.CharField(max_length=255)
+
+
+
 class Task(models.Model):
   title = models.CharField(max_length=255)
   details = models.TextField()
@@ -10,10 +18,10 @@ class Task(models.Model):
   updated_date = models.DateTimeField()
   due_date = models.DateTimeField()
   status = [
-    (complete, "Complete"),
-    (hold, "Hold"),
-    (to_do, "To Do"),
-    (in_prog, "In Progress")
+    ("complete", "Complete"),
+    ("hold", "Hold"),
+    ("to_do", "To Do"),
+    ("in_prog", "In Progress")
   ]
   tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="tasks_w_tag")
   poster = models.ForeignKey(User, on_delete=models.CASCADE, related_name="UserTasks")
@@ -28,9 +36,6 @@ class Taskboard(models.Model):
   task = models.ForeignKey(Task, on_delete=models.CASCADE)
   creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="UserTaskLists")
   other_users = models.ManyToManyField(User, related_name="Taskboards")
-
-class Tag(models.Model):
-  name = models.CharField(max_length=255)
 
 class Perms(models.Model):
   taskboard = models.ForeignKey(Taskboard, on_delete=models.CASCADE)

@@ -1,5 +1,5 @@
 from django.db import models
-from process.models import Taskboard, Task
+# from apps.process.models import Taskboard, Task
 
 # Create your models here.
 class User(models.Model):
