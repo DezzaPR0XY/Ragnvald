@@ -1,5 +1,5 @@
 from django.db import models
-from apps.login_reg.models import User
+from ..login_reg.models import User
 
 # Create your models here.
 # For a FKey does "this" need another relationship on create
@@ -37,7 +37,7 @@ class Taskboard(models.Model):
   creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="UserTaskLists")
   other_users = models.ManyToManyField(User, related_name="Taskboards")
 
-class Perms(models.Model):
+class Perm(models.Model):
   taskboard = models.ForeignKey(Taskboard, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   level = models.IntegerField()
