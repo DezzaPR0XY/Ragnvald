@@ -10,14 +10,23 @@ from .models import User
 def index(request):
   if request.method == 'POST':
     print(request.POST)
-    errors = User.objects.is_valid(request.POST)
-    if len(errors) > 0:
-      print(errors)
-      return render(request, 'login_reg/login.html', errors)
-    user = User.objects.create(name_first=request.POST['first_name'], name_last=request.POST['last_name'], email=request.POST['email'], password=request.POST['password'])
-    print(user)
-    print("Success!")
-    return redirect('/taskboard')
+    form = request.POST
+    if form['route'] == 'register':
+      errors = User.objects.is_valid(form)
+      if len(errors) > 0:
+        print(errors)
+        return render(request, 'login_reg/login.html', errors)
+      user = User.objects.create(name_first=form['first_name'], name_last=form['last_name'], email=form['email'], password=form['password'])
+      print(user)
+      print("Success!")
+      return redirect('/taskboard')
+    if form['route'] == 'login':
+      user = User.objects.filter(email=form['email'])
+      print(user)
+      if len(user) > 0:
+        if user.password == form['password']:
+          print("Success!")
+          return redirect('/taskboard')
   return render(request, 'login_reg/login.html')
 
 
