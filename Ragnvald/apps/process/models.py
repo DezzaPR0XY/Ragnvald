@@ -9,8 +9,6 @@ from ..login_reg.models import User
 class Tag(models.Model):
   name = models.CharField(max_length=255)
 
-
-
 class Task(models.Model):
   title = models.CharField(max_length=255)
   details = models.TextField()
@@ -25,9 +23,6 @@ class Task(models.Model):
   ]
   tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="tasks_w_tag")
   poster = models.ForeignKey(User, on_delete=models.CASCADE, related_name="UserTasks")
-
-  def __str__(self):
-    return self.title
 
 class Taskboard(models.Model):
   name = models.CharField(max_length=255)

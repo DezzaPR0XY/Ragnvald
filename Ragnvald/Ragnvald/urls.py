@@ -19,6 +19,6 @@ from django.conf.urls import url, include
 
 urlpatterns = [
   url(r'^', include('apps.login_reg.urls')),
-  url(r'^', include('apps.process.urls')),
+  url(r'^taskboard', include('apps.process.urls')),
   path('admin/', admin.site.urls),
 ]

@@ -8,17 +8,39 @@ from .models import User
 
 
 def index(request):
-  if request.method == 'POST':
-    print(request.POST)
-    errors = User.objects.is_valid(request.POST)
-    if len(errors) > 0:
-      print(errors)
-      return render(request, 'login_reg/login.html', errors)
-    user = User.objects.create(name_first=request.POST['first_name'], name_last=request.POST['last_name'], email=request.POST['email'], password=request.POST['password'])
-    print(user)
-    print("Success!")
-    return redirect('/taskboard')
-  return render(request, 'login_reg/login.html')
+  # return render(request,"login_reg/login.html")
+# def signup(request):
+    if request.method == 'POST':
+        # form = SignUpForm(request.POST)
+        print(request.POST)
+        errors = User.objects.is_valid(request.POST)
+        if len(errors) > 0:
+            print(errors)
+            return render(request, 'login_reg/login.html', errors)
+        user = User.objects.create(name_first=request.POST['first_name'], name_last=request.POST['last_name'], email=request.POST['email'], password=request.POST['password'])
+        # if form.is_valid():
+        #     form.save()
+        #     username = form.cleaned_data.get('username')
+        #     print(username)
+        #     first_name = form.cleaned_data.get('first_name')
+        #     print(first_name)
+        #     last_name = form.cleaned_data.get('last_name')
+        #     print(last_name)
+        #     email = form.cleaned_data.get('email')
+        #     print(email)
+        #     password = form.cleaned_data.get('password1')
+        #     print(password)
+        #     confirm_pw = form.cleaned_data.get('password2')
+        #     print(confirm_pw)
+        #     print(username, first_name, last_name, password, confirm_pw)
+        #     user = User(username=username, first_name=first_name, last_name=last_name, email=email, password=password, confirm_pw=confirm_pw)
+        #     login(request, user)
+        print(user)
+        print("Success!")
+        return redirect('/taskboard')
+    # else:
+    #     form = SignUpForm()
+    return render(request, 'login_reg/login.html')
 
 
 def register(request):
