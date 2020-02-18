@@ -13,15 +13,6 @@
 
 
 <body>
-
-
-  <!-- <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form> -->
-
 <div class="wrapper">
 <div class="content">
   <div class="login">
@@ -37,18 +28,6 @@
   <div class="register">
     <form action="" method="post">
       {% csrf_token %}
-      <!-- {% for field in form %}
-        <p>
-          {{ field.label_tag }}<br>
-          {{ field }}
-          {% if field.help_text %}
-            <small style="color: grey">{{ field.help_text }}</small>
-          {% endif %}
-          {% for error in field.errors %}
-            <p style="color: red">{{ error }}</p>
-          {% endfor %}
-        </p>
-      {% endfor %} -->
       {% for error in errors %}
         <p>
           {{ error }}
